@@ -16,6 +16,7 @@ interface userType {
 })
 export class SideBarComponent {
   @Input({ required: true }) user!: userType;
+  @Input({ required: true }) selected!: boolean;
   @Output() select = new EventEmitter<string>();
 
   imagePath() {
