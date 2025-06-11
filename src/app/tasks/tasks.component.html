@@ -1,7 +1,10 @@
+@if (isNewTaskSelected) {
+<app-new-task-bar />
+}
 <section id="tasks">
   <header>
     <h2>{{ user?.()?.name }}'s Tasks</h2>
-    <menu><button>Add Task</button></menu>
+    <menu><button (click)="onSelectNewTask()">Add Task</button></menu>
   </header>
   @if (user) {
   <ul>

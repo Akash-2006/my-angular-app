@@ -11,6 +11,7 @@ import {
 import { userType } from '../app.component';
 import { TaskComponent } from './task/task.component';
 import { dummyTasks } from '../dummy-tasks';
+import { NewTaskBarComponent } from './new-task-bar/new-task-bar.component';
 export interface TaskType {
   id: string;
   userId: string;
@@ -23,13 +24,14 @@ export interface TaskType {
 @Component({
   selector: 'app-tasks',
   standalone: true,
-  imports: [TaskComponent],
+  imports: [TaskComponent, NewTaskBarComponent],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css',
 })
 export class TasksComponent {
   @Input({ required: true }) user?: Signal<userType>;
   tasksOrigin: WritableSignal<TaskType[]> = signal(dummyTasks);
+  isNewTaskSelected = false;
   tasks = computed(() =>
     this.tasksOrigin().filter((task) => this.user?.()?.id === task.userId)
   );
@@ -37,5 +39,9 @@ export class TasksComponent {
   removeTask(taskId: string) {
     const updated = this.tasksOrigin().filter((task) => task.id !== taskId);
     this.tasksOrigin.set(updated);
+  }
+
+  onSelectNewTask() {
+    this.isNewTaskSelected = true;
   }
 }
