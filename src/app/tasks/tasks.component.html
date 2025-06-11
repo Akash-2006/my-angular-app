@@ -1,5 +1,5 @@
 @if (isNewTaskSelected) {
-<app-new-task-bar (close)="onSelectClose()" />
+<app-new-task-bar (close)="onSelectClose()" (submit)="addTaskToUser($event)" />
 }
 <section id="tasks">
   <header>
