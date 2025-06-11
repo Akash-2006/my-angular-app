@@ -1,12 +1,15 @@
 @if (taskOfUser) {
-<article>
-  <h2>{{ taskOfUser.title }}</h2>
-  <time>{{ taskOfUser.dueDate }}</time>
-  <p>{{ taskOfUser.summary }}</p>
-  <p class="actions">
-    <button (click)="onToggleStatus()">
-      {{ "Done" }}
-    </button>
-  </p>
-</article>
+
+<app-card>
+  <article>
+    <h2>{{ taskOfUser.title }}</h2>
+    <time>{{ taskOfUser.dueDate }}</time>
+    <p>{{ taskOfUser.summary }}</p>
+    <p class="actions">
+      <button (click)="onToggleStatus()">
+        {{ "Done" }}
+      </button>
+    </p>
+  </article>
+</app-card>
 }

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DUMMY_USERS } from '../dummy-users';
+import { CardComponent } from '../shared/card/card.component';
 
 interface userType {
   id: string;
@@ -10,7 +11,7 @@ interface userType {
 @Component({
   selector: 'app-side-bar',
   standalone: true,
-  imports: [],
+  imports: [CardComponent],
   templateUrl: './side-bar.component.html',
   styleUrl: './side-bar.component.css',
 })
