@@ -1,9 +1,7 @@
 import {
   Component,
   computed,
-  EventEmitter,
   Input,
-  Output,
   signal,
   Signal,
   WritableSignal,
@@ -43,5 +41,8 @@ export class TasksComponent {
 
   onSelectNewTask() {
     this.isNewTaskSelected = true;
+  }
+  onSelectClose() {
+    this.isNewTaskSelected = false;
   }
 }

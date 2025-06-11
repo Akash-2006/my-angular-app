@@ -1,5 +1,5 @@
 @if (isNewTaskSelected) {
-<app-new-task-bar />
+<app-new-task-bar (close)="onSelectClose()" />
 }
 <section id="tasks">
   <header>
