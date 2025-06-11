@@ -34,10 +34,8 @@ export class TasksComponent {
     this.tasksOrigin().filter((task) => this.user?.()?.id === task.userId)
   );
 
-  changeStatus(taskId: string) {
-    const updated = this.tasksOrigin().map((task) =>
-      task.id === taskId ? { ...task, isDone: !task.isDone } : task
-    );
+  removeTask(taskId: string) {
+    const updated = this.tasksOrigin().filter((task) => task.id !== taskId);
     this.tasksOrigin.set(updated);
   }
 }
