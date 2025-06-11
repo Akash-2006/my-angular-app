@@ -1,0 +1,15 @@
+<section id="tasks">
+  <header>
+    <h2>{{ user?.()?.name }}'s Tasks</h2>
+    <menu><button>Add Task</button></menu>
+  </header>
+  @if (user) {
+  <ul>
+    @for (task of tasks(); track task.id) {
+    <li>
+      <app-task [taskOfUser]="task" (taskStat)="changeStatus($event)" />
+    </li>
+    }
+  </ul>
+  }
+</section>

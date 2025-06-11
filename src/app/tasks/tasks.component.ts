@@ -1,0 +1,43 @@
+import {
+  Component,
+  computed,
+  EventEmitter,
+  Input,
+  Output,
+  signal,
+  Signal,
+  WritableSignal,
+} from '@angular/core';
+import { userType } from '../app.component';
+import { TaskComponent } from './task/task.component';
+import { dummyTasks } from '../dummy-tasks';
+export interface TaskType {
+  id: string;
+  userId: string;
+  title: string;
+  dueDate: string;
+  summary: string;
+  isDone: boolean;
+}
+
+@Component({
+  selector: 'app-tasks',
+  standalone: true,
+  imports: [TaskComponent],
+  templateUrl: './tasks.component.html',
+  styleUrl: './tasks.component.css',
+})
+export class TasksComponent {
+  @Input({ required: true }) user?: Signal<userType>;
+  tasksOrigin: WritableSignal<TaskType[]> = signal(dummyTasks);
+  tasks = computed(() =>
+    this.tasksOrigin().filter((task) => this.user?.()?.id === task.userId)
+  );
+
+  changeStatus(taskId: string) {
+    const updated = this.tasksOrigin().map((task) =>
+      task.id === taskId ? { ...task, isDone: !task.isDone } : task
+    );
+    this.tasksOrigin.set(updated);
+  }
+}
