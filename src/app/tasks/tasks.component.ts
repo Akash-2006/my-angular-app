@@ -1,5 +1,5 @@
 import { Component, inject, Input, Signal } from '@angular/core';
-import { userType } from '../app.component';
+import { UserType } from '../app.component';
 import { TaskComponent } from './task/task.component';
 import { NewTaskBarComponent } from './new-task-bar/new-task-bar.component';
 import { TasksService } from './tasks.service';
@@ -20,9 +20,9 @@ export interface TaskType {
   styleUrl: './tasks.component.css',
 })
 export class TasksComponent {
-  @Input({ required: true }) user?: Signal<userType>;
-  isNewTaskSelected = false;
-  private taskService = inject(TasksService);
+  @Input({ required: true }) user?: Signal<UserType>;
+
+  protected readonly taskService = inject(TasksService);
   removeTask(taskId: string) {
     this.taskService.removeTask(taskId);
   }
@@ -31,12 +31,12 @@ export class TasksComponent {
     if (this.user && this.user()?.id) {
       return this.taskService.getTasks(this.user()?.id);
     }
-    return;
+    return undefined;
   }
   onSelectNewTask() {
-    this.isNewTaskSelected = true;
+    this.taskService.isNewTaskSelected = true;
   }
   onSelectClose() {
-    this.isNewTaskSelected = false;
+    this.taskService.isNewTaskSelected = false;
   }
 }

@@ -1,4 +1,4 @@
-@if (isNewTaskSelected) {
+@if (taskService.isNewTaskSelected) {
 <app-new-task-bar (close)="onSelectClose()" [userId]="user?.()?.id" />
 }
 <section id="tasks">

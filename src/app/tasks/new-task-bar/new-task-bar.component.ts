@@ -1,7 +1,7 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TasksService } from '../tasks.service';
-export interface newTaskType {
+export interface NewTaskType {
   taskTitle: string;
   taskSummary: string;
   dueDate: string;
@@ -20,14 +20,15 @@ export class NewTaskBarComponent {
   taskTitle = '';
   taskSummary = '';
   dueDate = '';
-  private taskService = inject(TasksService);
+  private readonly taskService = inject(TasksService);
 
   onClose() {
     this.close.emit();
   }
 
-  addTaskToUser(newTask: newTaskType) {
-    this.taskService.addTask(newTask, this.userId || '');
+  addTaskToUser(newTask: NewTaskType) {
+    this.taskService.addTask(newTask, this.userId ?? '');
+    this.taskService.isNewTaskSelected = false;
   }
 
   onSubmit() {
@@ -35,7 +36,7 @@ export class NewTaskBarComponent {
       alert('❌ Validation failed');
       return;
     }
-    const newTask: newTaskType = {
+    const newTask: NewTaskType = {
       taskTitle: this.taskTitle,
       dueDate: this.dueDate,
       taskSummary: this.taskSummary,

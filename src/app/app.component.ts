@@ -4,7 +4,7 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 import { DUMMY_USERS } from './dummy-users';
 import { TasksComponent } from './tasks/tasks.component';
 
-export interface userType {
+export interface UserType {
   id: string;
   name: string;
   avatar: string;
@@ -18,8 +18,8 @@ export interface userType {
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  users: userType[] = DUMMY_USERS;
-  selectedUser?: WritableSignal<userType> = signal(DUMMY_USERS[9]);
+  users: UserType[] = DUMMY_USERS;
+  selectedUser?: WritableSignal<UserType> = signal(DUMMY_USERS[9]);
 
   onSelect(id: string) {
     this.selectedUser?.set(DUMMY_USERS[this.findSelectedUser(id)]);

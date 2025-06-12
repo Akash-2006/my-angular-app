@@ -1,11 +1,12 @@
-import { computed, Injectable, signal, WritableSignal } from '@angular/core';
+import { Injectable, signal, WritableSignal } from '@angular/core';
 import { TaskType } from './tasks.component';
 import { dummyTasks } from '../dummy-tasks';
-import { newTaskType } from './new-task-bar/new-task-bar.component';
+import { NewTaskType } from './new-task-bar/new-task-bar.component';
 
 @Injectable({ providedIn: 'root' })
 export class TasksService {
   tasksOrigin: WritableSignal<TaskType[]> = signal(dummyTasks);
+  public isNewTaskSelected = false;
   constructor() {
     const tasksFromLocalStorage = localStorage.getItem('tasks');
     if (tasksFromLocalStorage) {
@@ -22,10 +23,10 @@ export class TasksService {
     this.saveTasks();
   }
 
-  addTask(event: newTaskType, userId: string) {
+  addTask(event: NewTaskType, userId: string) {
     const newTask: TaskType = {
       id: crypto.randomUUID(),
-      userId: userId || '',
+      userId: userId ?? '',
       title: event.taskTitle,
       dueDate: event.dueDate,
       summary: event.taskSummary,

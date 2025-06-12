@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { DUMMY_USERS } from '../dummy-users';
 import { CardComponent } from '../shared/card/card.component';
 
-interface userType {
+interface UserType {
   id: string;
   name: string;
   avatar: string;
@@ -16,7 +15,7 @@ interface userType {
   styleUrl: './side-bar.component.css',
 })
 export class SideBarComponent {
-  @Input({ required: true }) user!: userType;
+  @Input({ required: true }) user!: UserType;
   @Input({ required: true }) selected!: boolean;
   @Output() select = new EventEmitter<string>();
 
