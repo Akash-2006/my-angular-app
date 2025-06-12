@@ -6,6 +6,12 @@ import { newTaskType } from './new-task-bar/new-task-bar.component';
 @Injectable({ providedIn: 'root' })
 export class TasksService {
   tasksOrigin: WritableSignal<TaskType[]> = signal(dummyTasks);
+  constructor() {
+    const tasksFromLocalStorage = localStorage.getItem('tasks');
+    if (tasksFromLocalStorage) {
+      this.tasksOrigin.set(JSON.parse(tasksFromLocalStorage));
+    }
+  }
   getTasks(userId: string) {
     return this.tasksOrigin().filter((task) => userId === task.userId);
   }
@@ -13,6 +19,7 @@ export class TasksService {
   removeTask(taskId: string) {
     const updated = this.tasksOrigin().filter((task) => task.id !== taskId);
     this.tasksOrigin.set(updated);
+    this.saveTasks();
   }
 
   addTask(event: newTaskType, userId: string) {
@@ -25,5 +32,10 @@ export class TasksService {
       isDone: false,
     };
     this.tasksOrigin.set([...this.tasksOrigin(), newTask]);
+    this.saveTasks();
+  }
+
+  private saveTasks() {
+    localStorage.setItem('tasks', JSON.stringify(this.tasksOrigin()));
   }
 }
