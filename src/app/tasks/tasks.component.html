@@ -1,5 +1,5 @@
 @if (isNewTaskSelected) {
-<app-new-task-bar (close)="onSelectClose()" (submit)="addTaskToUser($event)" />
+<app-new-task-bar (close)="onSelectClose()" [userId]="user?.()?.id" />
 }
 <section id="tasks">
   <header>
@@ -8,7 +8,7 @@
   </header>
   @if (user) {
   <ul>
-    @for (task of tasks(); track task.id) {
+    @for (task of fetchTasks(); track task.id) {
     <li>
       <app-task [taskOfUser]="task" (taskStat)="removeTask($event)" />
     </li>

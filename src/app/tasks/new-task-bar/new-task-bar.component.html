@@ -4,7 +4,13 @@
   <form (ngSubmit)="onSubmit()">
     <p>
       <label for="title">Title</label>
-      <input type="text" id="title" name="title" [(ngModel)]="taskTitle" />
+      <input
+        type="text"
+        id="title"
+        name="title"
+        [(ngModel)]="taskTitle"
+        required
+      />
     </p>
 
     <p>
@@ -14,12 +20,19 @@
         rows="5"
         name="summary"
         [(ngModel)]="taskSummary"
+        required
       ></textarea>
     </p>
 
     <p>
       <label for="due-date">Due Date</label>
-      <input type="date" id="due-date" name="due-date" [(ngModel)]="dueDate" />
+      <input
+        type="date"
+        id="due-date"
+        name="due-date"
+        [(ngModel)]="dueDate"
+        required
+      />
     </p>
 
     <p class="actions">

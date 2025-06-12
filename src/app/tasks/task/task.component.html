@@ -3,7 +3,7 @@
 <app-card>
   <article>
     <h2>{{ taskOfUser.title }}</h2>
-    <time>{{ taskOfUser.dueDate }}</time>
+    <time>{{ taskOfUser.dueDate | date : "fullDate" }}</time>
     <p>{{ taskOfUser.summary }}</p>
     <p class="actions">
       <button (click)="onToggleStatus()">

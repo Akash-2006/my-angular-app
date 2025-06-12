@@ -1,10 +1,20 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  input,
+  Output,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { TasksService } from '../tasks.service';
+import { TaskType } from '../tasks.component';
 export interface newTaskType {
-  taskTiltle: string;
+  taskTitle: string;
   taskSummary: string;
   dueDate: string;
 }
+
 @Component({
   selector: 'app-new-task-bar',
   standalone: true,
@@ -14,19 +24,30 @@ export interface newTaskType {
 })
 export class NewTaskBarComponent {
   @Output() close = new EventEmitter<void>();
-  @Output() submit = new EventEmitter<newTaskType>();
+  @Input({ required: true }) userId?: string;
   taskTitle = '';
   taskSummary = '';
   dueDate = '';
+  private taskService = inject(TasksService);
 
   onClose() {
     this.close.emit();
   }
+
+  addTaskToUser(newTask: newTaskType) {
+    this.taskService.addTask(newTask, this.userId || '');
+  }
+
   onSubmit() {
-    this.submit.emit({
-      taskTiltle: this.taskTitle,
-      taskSummary: this.taskSummary,
+    if (!this.taskTitle || !this.taskSummary || !this.dueDate) {
+      alert('❌ Validation failed');
+      return;
+    }
+    const newTask: newTaskType = {
+      taskTitle: this.taskTitle,
       dueDate: this.dueDate,
-    });
+      taskSummary: this.taskSummary,
+    };
+    this.addTaskToUser(newTask);
   }
 }
