@@ -18,6 +18,7 @@ export class TasksService {
   loadTasks() {
     this.tasksOrigin.set(loadData());
   }
+
   getTasks(userId: string) {
     return this.tasksOrigin().filter((task) => userId === task.userId);
   }

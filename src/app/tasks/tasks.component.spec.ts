@@ -5,8 +5,9 @@ import { UserType } from '../app.component';
 import { TasksService } from './tasks.service';
 import { TasksComponent } from './tasks.component';
 
-class MockTasksService {
+export class MockTasksService {
   isNewTaskSelected = false;
+  addTask = jasmine.createSpy('add Task');
   removeTask = jasmine.createSpy('removeTask');
   getTasks = jasmine.createSpy('getTasks').and.returnValue([]);
   loadTasks = jasmine.createSpy('load tasks');

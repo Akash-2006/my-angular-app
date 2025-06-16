@@ -4,7 +4,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 import { DUMMY_USERS } from './dummy-users';
 import { provideRouter } from '@angular/router';
-import { route } from './app.route';
 
 describe('has to find the user', () => {
   let component: AppComponent;
@@ -12,7 +11,6 @@ describe('has to find the user', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [AppComponent],
-      providers: [provideRouter(route)],
     }).compileComponents();
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
