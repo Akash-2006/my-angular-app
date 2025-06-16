@@ -5,7 +5,7 @@ import { NewTaskBarComponent } from './new-task-bar/new-task-bar.component';
 import { TasksService } from './tasks.service';
 export interface TaskType {
   id: string;
-  userId: string;
+  userId: string | null;
   title: string;
   dueDate: string;
   summary: string;

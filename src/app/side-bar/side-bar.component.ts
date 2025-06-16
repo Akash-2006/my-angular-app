@@ -15,15 +15,18 @@ interface UserType {
   styleUrl: './side-bar.component.css',
 })
 export class SideBarComponent {
-  @Input({ required: true }) user!: UserType;
+  @Input({ required: true }) user!: UserType | null;
   @Input({ required: true }) selected!: boolean;
   @Output() select = new EventEmitter<string>();
 
   imagePath() {
+    if (!this.user) {
+      return '../../assets/users/user-1.jpg';
+    }
     return `../../assets/users/${this.user.avatar}`;
   }
 
   onSelectUser() {
-    this.select.emit(this.user.id);
+    this.select.emit(this.user?.id);
   }
 }
