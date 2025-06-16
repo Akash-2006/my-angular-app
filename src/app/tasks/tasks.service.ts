@@ -2,16 +2,21 @@ import { Injectable, signal, WritableSignal } from '@angular/core';
 import { TaskType } from './tasks.component';
 import { dummyTasks } from '../dummy-tasks';
 import { NewTaskType } from './new-task-bar/new-task-bar.component';
+function storeData(data: TaskType[]) {
+  localStorage.setItem('tasks', JSON.stringify(data));
+}
+function loadData(): TaskType[] {
+  const data = localStorage.getItem('tasks');
+  return data ? JSON.parse(data) : dummyTasks;
+}
 
 @Injectable({ providedIn: 'root' })
 export class TasksService {
   tasksOrigin: WritableSignal<TaskType[]> = signal(dummyTasks);
   public isNewTaskSelected = false;
-  constructor() {
-    const tasksFromLocalStorage = localStorage.getItem('tasks');
-    if (tasksFromLocalStorage) {
-      this.tasksOrigin.set(JSON.parse(tasksFromLocalStorage));
-    }
+  constructor() {}
+  loadTasks() {
+    this.tasksOrigin.set(loadData());
   }
   getTasks(userId: string) {
     return this.tasksOrigin().filter((task) => userId === task.userId);
@@ -37,6 +42,6 @@ export class TasksService {
   }
 
   private saveTasks() {
-    localStorage.setItem('tasks', JSON.stringify(this.tasksOrigin()));
+    storeData(this.tasksOrigin());
   }
 }

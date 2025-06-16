@@ -1,0 +1,4 @@
+<p>user-name works {{ fetchUserName() }}!</p>
+@for (item of fetchTasks(); track item.id) {
+<app-task [taskOfUser]="item"></app-task>
+}

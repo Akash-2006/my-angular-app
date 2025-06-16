@@ -9,6 +9,7 @@ class MockTasksService {
   isNewTaskSelected = false;
   removeTask = jasmine.createSpy('removeTask');
   getTasks = jasmine.createSpy('getTasks').and.returnValue([]);
+  loadTasks = jasmine.createSpy('load tasks');
 }
 
 describe('tasks Componet', () => {

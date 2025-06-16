@@ -1,4 +1,4 @@
-import { Component, inject, Input, Signal } from '@angular/core';
+import { Component, inject, Input, OnInit, Signal } from '@angular/core';
 import { UserType } from '../app.component';
 import { TaskComponent } from './task/task.component';
 import { NewTaskBarComponent } from './new-task-bar/new-task-bar.component';
@@ -19,7 +19,7 @@ export interface TaskType {
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css',
 })
-export class TasksComponent {
+export class TasksComponent implements OnInit {
   @Input({ required: true }) user?: Signal<UserType>;
 
   protected readonly taskService = inject(TasksService);
@@ -27,6 +27,9 @@ export class TasksComponent {
     this.taskService.removeTask(taskId);
   }
 
+  ngOnInit() {
+    this.taskService.loadTasks();
+  }
   fetchTasks() {
     if (this.user && this.user()?.id) {
       return this.taskService.getTasks(this.user()?.id);

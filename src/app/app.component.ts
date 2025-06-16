@@ -3,6 +3,7 @@ import { HeaderComponent } from './header/header.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { DUMMY_USERS } from './dummy-users';
 import { TasksComponent } from './tasks/tasks.component';
+import { RouterOutlet } from '@angular/router';
 
 export interface UserType {
   id: string;
@@ -13,7 +14,7 @@ export interface UserType {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HeaderComponent, SideBarComponent, TasksComponent],
+  imports: [HeaderComponent, SideBarComponent, TasksComponent, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
